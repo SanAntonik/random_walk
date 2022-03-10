@@ -2,19 +2,60 @@ import random
 import collections
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 
 # heads = 1 (one step forward) and tails = -1 (one step backwards)
 coin_flip = [1, -1]
-n = 1000
+n = 10
 
+
+def point_calc(n=1000, loop_count=4):
+    tosses = []
+    ys = []
+    for i in range(0, loop_count):
+        tosses.append([random.choice(coin_flip) for x in range(0, n)])
+        ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
+
+
+def point_calc_improved(n=1000, loop_count=4):
+    tosses = []
+    ys = []
+    for i in range(0, loop_count):
+        tosses.append([random.choice(coin_flip) for x in range(0, n)])
+        ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
+
+
+start = time.time()
+point_calc(n=10000, loop_count=10)
+end = time.time()
+print(f"Elapsed time: {end - start}")
+
+
+def coin_flip():
+    return random.choice([-1, 1])
+
+
+# for i in range(10000):
+#     tosses = []
+#     for i in range(10000):
+#         tosses.append(coin_flip())
+#     print(tosses.count(1)/10000)
+
+# # 1D
+def walk_1d(n, subplots_number=1, plots_per_figure=1):
+    pass
 
 # tosses = []
 # ys = []
 # for i in range(0, 16):
 #     tosses.append([random.choice(coin_flip) for x in range(0, n)])
 #     ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
+#     print(ys, len(ys))
 # # print(ys)
+
+
+
 
 # fig, ((ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8), (ax9, ax10, ax11, ax12), (ax13, ax14, ax15, ax16)) = plt.subplots(4, 4)
 # ax1.plot(ys[0])
@@ -70,31 +111,59 @@ n = 1000
 # plt.show()
 
 
-x_tosses = []
-xs = []
-y_tosses = []
-ys = []
-for i in range(0, 4):
-    x_tosses.append([random.choice(coin_flip) for x in range(0, n)])
-    xs.append([sum(x_tosses[i][0:x]) for x in range(0, n)])
-    y_tosses.append([random.choice(coin_flip) for x in range(0, n)])
-    ys.append([sum(y_tosses[i][0:x]) for x in range(0, n)])
+# 2D
+# x_tosses = []
+# xs = []
+# y_tosses = []
+# ys = []
+# for i in range(0, 4):
+#     x_tosses.append([random.choice(coin_flip) for x in range(0, n)])
+#     xs.append([sum(x_tosses[i][0:x]) for x in range(0, n)])
+#     y_tosses.append([random.choice(coin_flip) for x in range(0, n)])
+#     ys.append([sum(y_tosses[i][0:x]) for x in range(0, n)])
 
-fig = plt.figure()
-gs = fig.add_gridspec(2, 2, hspace=0, wspace=0)
-(ax1, ax2), (ax3, ax4) = gs.subplots(sharex='col', sharey='row')
-fig.suptitle('Sharing x per column, y per row')
-ax1.plot(xs[0] ,ys[0])
-ax2.plot(xs[1] ,ys[1], 'tab:orange')
-ax3.plot(xs[2] ,ys[2], 'tab:green')
-ax4.plot(xs[3] ,ys[3], 'tab:red')
+# fig = plt.figure()
+# gs = fig.add_gridspec(2, 2, hspace=0, wspace=0)
+# (ax1, ax2), (ax3, ax4) = gs.subplots(sharex='col', sharey='row')
+# fig.suptitle('Sharing x per column, y per row')
+# ax1.plot(xs[0] ,ys[0])
+# ax2.plot(xs[1] ,ys[1], 'tab:orange')
+# ax3.plot(xs[2] ,ys[2], 'tab:green')
+# ax4.plot(xs[3] ,ys[3], 'tab:red')
 
-for ax in fig.get_axes():
-    ax.label_outer()
-    # ax.axhline(y=0, color="black", linestyle="-")
-    # ax.axvline(x=0, color="black", linestyle="-")
-    ax.grid()
-plt.show()
+# for ax in fig.get_axes():
+#     ax.label_outer()
+#     # ax.axhline(y=0, color="black", linestyle="-")
+#     # ax.axvline(x=0, color="black", linestyle="-")
+#     ax.grid()
+# plt.show()
+
+
+# x_tosses = []
+# xs = []
+# y_tosses = []
+# ys = []
+# for i in range(0, 4):
+#     x_tosses.append([random.choice(coin_flip) for x in range(0, n)])
+#     xs.append([sum(x_tosses[i][0:x]) for x in range(0, n)])
+#     y_tosses.append([random.choice(coin_flip) for x in range(0, n)])
+#     ys.append([sum(y_tosses[i][0:x]) for x in range(0, n)])
+
+# fig = plt.figure()
+# gs = fig.add_gridspec(2, 2, hspace=0, wspace=0)
+# (ax1, ax2), (ax3, ax4) = gs.subplots(sharex='col', sharey='row')
+# fig.suptitle('Sharing x per column, y per row')
+# ax1.plot(xs[0] ,ys[0])
+# ax2.plot(xs[1] ,ys[1], 'tab:orange')
+# ax3.plot(xs[2] ,ys[2], 'tab:green')
+# ax4.plot(xs[3] ,ys[3], 'tab:red')
+
+# for ax in fig.get_axes():
+#     ax.label_outer()
+#     # ax.axhline(y=0, color="black", linestyle="-")
+#     # ax.axvline(x=0, color="black", linestyle="-")
+#     ax.grid()
+# plt.show()
     # plt.plot(tosses)
     # print(tosses)
     # # print(random.choice(coin_flip))
