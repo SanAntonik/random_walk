@@ -7,30 +7,44 @@ import time
 
 # heads = 1 (one step forward) and tails = -1 (one step backwards)
 coin_flip = [1, -1]
-n = 10
+n = 100000
 
 
 def point_calc(n=1000, loop_count=4):
     tosses = []
     ys = []
-    for i in range(0, loop_count):
-        tosses.append([random.choice(coin_flip) for x in range(0, n)])
-        ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
+    tosses.append([random.choice(coin_flip) for x in range(0, n)])
+    # print(tosses)
+    ys.append([sum(tosses[0][0:x]) for x in range(0, n)])
+    # print(ys)
+    # for i in range(0, loop_count):
+    #     tosses.append([random.choice(coin_flip) for x in range(0, n)])
+    #     ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
 
 
 def point_calc_improved(n=1000, loop_count=4):
-    tosses = []
+    tosses = [random.choice(coin_flip) for x in range(0, n)]
     ys = []
-    for i in range(0, loop_count):
-        tosses.append([random.choice(coin_flip) for x in range(0, n)])
-        ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
+    # print(tosses)
+    y_t = 0
+    for i in range(0, n):
+        y_t += tosses[i]
+        ys.append(y_t)
+    # print(ys)
+    # for i in range(0, loop_count):
+    #     tosses.append([random.choice(coin_flip) for x in range(0, n)])
+    #     ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
 
 
 start = time.time()
-point_calc(n=10000, loop_count=10)
+point_calc(n, loop_count=10)
 end = time.time()
 print(f"Elapsed time: {end - start}")
 
+start = time.time()
+point_calc_improved(n, loop_count=10)
+end = time.time()
+print(f"Elapsed time: {end - start}")
 
 def coin_flip():
     return random.choice([-1, 1])
