@@ -1,64 +1,85 @@
 import random
-import collections
 import matplotlib.pyplot as plt
 import numpy as np
 import time
 
+"""After running a bunch of tests, I found out that:
+1. it's better to call built-in functions directly without custom functions
+2. It's better to create one variable once and use it a lot of times instead of creating the same variable over and over again
+"""
 
 # heads = 1 (one step forward) and tails = -1 (one step backwards)
 coin_flip = [1, -1]
 n = 100000
 
 
-def point_calc(n=1000, loop_count=4):
-    tosses = []
-    ys = []
-    tosses.append([random.choice(coin_flip) for x in range(0, n)])
-    # print(tosses)
-    ys.append([sum(tosses[0][0:x]) for x in range(0, n)])
-    # print(ys)
-    # for i in range(0, loop_count):
-    #     tosses.append([random.choice(coin_flip) for x in range(0, n)])
-    #     ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
-
-
-def point_calc_improved(n=1000, loop_count=4):
+def calculate(n):
     tosses = [random.choice(coin_flip) for x in range(0, n)]
-    ys = []
-    # print(tosses)
+    ys = [0]
     y_t = 0
-    for i in range(0, n):
-        y_t += tosses[i]
+    for toss in tosses:
+        y_t += toss
         ys.append(y_t)
-    # print(ys)
-    # for i in range(0, loop_count):
+    return ys
+
+
+for i in range(1):
+    test_figures_count = 1
+    start = time.time()
+
+    for i in range(test_figures_count):
+        plt.plot(calculate(n), calculate(n))
+    plt.axhline(y=0, color="black", linestyle="-")
+    end = time.time()
+    print(f"Elapsed time: {end - start}")
+    plt.show()
+
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+    ax1.plot(calculate(n), calculate(n))
+    ax2.plot(calculate(n), calculate(n))
+    ax3.plot(calculate(n), calculate(n))
+    ax4.plot(calculate(n), calculate(n))
+
+    for ax in fig.get_axes():
+        ax.label_outer()
+        ax.axhline(y=0, color="black", linestyle="-")
+    plt.show()
+
+    # start = time.time()
+    # tosses = []
+    # ys = []
+    # for i in range(test_figures_count):
     #     tosses.append([random.choice(coin_flip) for x in range(0, n)])
     #     ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
 
+    # for y in ys:
+    #     plt.plot(y)
+    # plt.axhline(y=0, color="black", linestyle="-")
+    # end = time.time()
+    # print(f"Elapsed time: {end - start}")
+    # plt.show()
 
-start = time.time()
-point_calc(n, loop_count=10)
-end = time.time()
-print(f"Elapsed time: {end - start}")
+# tosses = []
+# ys = []
+# for i in range(0, 4):
+#     tosses.append([random.choice(coin_flip) for x in range(0, n)])
+#     ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
 
-start = time.time()
-point_calc_improved(n, loop_count=10)
-end = time.time()
-print(f"Elapsed time: {end - start}")
+# fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+# ax1.plot(ys[0])
+# ax2.plot(ys[1])
+# ax3.plot(ys[2])
+# ax4.plot(ys[3])
 
-def coin_flip():
-    return random.choice([-1, 1])
+# for ax in fig.get_axes():
+#     ax.label_outer()
+#     ax.axhline(y=0, color="black", linestyle="-")
+# plt.show()
 
 
-# for i in range(10000):
-#     tosses = []
-#     for i in range(10000):
-#         tosses.append(coin_flip())
-#     print(tosses.count(1)/10000)
-
-# # 1D
-def walk_1d(n, subplots_number=1, plots_per_figure=1):
-    pass
+# # # 1D
+# def walk_1d(n, subplots_number=1, plots_per_figure=1):
+#     pass
 
 # tosses = []
 # ys = []
@@ -67,9 +88,6 @@ def walk_1d(n, subplots_number=1, plots_per_figure=1):
 #     ys.append([sum(tosses[i][0:x]) for x in range(0, n)])
 #     print(ys, len(ys))
 # # print(ys)
-
-
-
 
 # fig, ((ax1, ax2, ax3, ax4), (ax5, ax6, ax7, ax8), (ax9, ax10, ax11, ax12), (ax13, ax14, ax15, ax16)) = plt.subplots(4, 4)
 # ax1.plot(ys[0])
@@ -125,7 +143,7 @@ def walk_1d(n, subplots_number=1, plots_per_figure=1):
 # plt.show()
 
 
-# 2D
+# # 2D
 # x_tosses = []
 # xs = []
 # y_tosses = []
@@ -177,22 +195,4 @@ def walk_1d(n, subplots_number=1, plots_per_figure=1):
 #     # ax.axhline(y=0, color="black", linestyle="-")
 #     # ax.axvline(x=0, color="black", linestyle="-")
 #     ax.grid()
-# plt.show()
-    # plt.plot(tosses)
-    # print(tosses)
-    # # print(random.choice(coin_flip))
-    # print(collections.Counter(tosses))
-
-
-
-
-# print(plt.__version__)
-# print(np.random.seed(444))
-
-# plt.plot([1, 2, 3, 4], [18, 2, 3, 4], 'ro')
-
-# t = np.arange(0., 5., 0.2)
-# plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
-
-# plt.ylabel("some numbers")
 # plt.show()
