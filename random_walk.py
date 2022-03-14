@@ -8,9 +8,10 @@ import time
 2. It's better to create one variable once and use it a lot of times instead of creating the same variable over and over again
 """
 
+
 # heads = 1 (one step forward) and tails = -1 (one step backwards)
 coin_flip = [1, -1]
-n = 100000
+n = 500000
 
 
 def calculate(n):
@@ -23,27 +24,37 @@ def calculate(n):
     return ys
 
 
+def walk_1d(n, nrows=1, ncols=1, plots_per_figure=1):
+    # fig, axes = plt.subplots(nrows, ncols)
+    plt.plot(calculate(n), color="purple")
+    plt.show()
+
+
+walk_1d(n)
+
+
 for i in range(1):
-    test_figures_count = 1
+    test_figures_count = 5
     start = time.time()
 
     for i in range(test_figures_count):
-        plt.plot(calculate(n), calculate(n))
+        plt.plot(calculate(n))
     plt.axhline(y=0, color="black", linestyle="-")
     end = time.time()
     print(f"Elapsed time: {end - start}")
+    plt.grid()
     plt.show()
 
-    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
-    ax1.plot(calculate(n), calculate(n))
-    ax2.plot(calculate(n), calculate(n))
-    ax3.plot(calculate(n), calculate(n))
-    ax4.plot(calculate(n), calculate(n))
+    # fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+    # ax1.plot(calculate(n), calculate(n))
+    # ax2.plot(calculate(n), calculate(n))
+    # ax3.plot(calculate(n), calculate(n))
+    # ax4.plot(calculate(n), calculate(n))
 
-    for ax in fig.get_axes():
-        ax.label_outer()
-        ax.axhline(y=0, color="black", linestyle="-")
-    plt.show()
+    # for ax in fig.get_axes():
+    #     ax.label_outer()
+    #     ax.axhline(y=0, color="black", linestyle="-")
+    # plt.show()
 
     # start = time.time()
     # tosses = []
@@ -77,9 +88,6 @@ for i in range(1):
 # plt.show()
 
 
-# # # 1D
-# def walk_1d(n, subplots_number=1, plots_per_figure=1):
-#     pass
 
 # tosses = []
 # ys = []
