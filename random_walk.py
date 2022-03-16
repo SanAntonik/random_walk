@@ -11,7 +11,7 @@ import time
 
 # heads = 1 (one step forward) and tails = -1 (one step backwards)
 coin_flip = [1, -1]
-n = 500000
+n = 50000
 
 
 def calculate(n):
@@ -25,25 +25,29 @@ def calculate(n):
 
 
 def walk_1d(n, nrows=1, ncols=1, plots_per_figure=1):
-    # fig, axes = plt.subplots(nrows, ncols)
-    plt.plot(calculate(n), color="purple")
+    fig, axes = plt.subplots(nrows, ncols)
+    # plt.plot(calculate(n), color="purple")
+    # plt.show()
+    for row in axes:
+        for column in row:
+            column.plot(calculate(n), color="purple")
     plt.show()
 
 
-walk_1d(n)
+walk_1d(n, 5, 4)
 
 
-for i in range(1):
-    test_figures_count = 5
-    start = time.time()
+# for i in range(1):
+#     test_figures_count = 5
+#     start = time.time()
 
-    for i in range(test_figures_count):
-        plt.plot(calculate(n))
-    plt.axhline(y=0, color="black", linestyle="-")
-    end = time.time()
-    print(f"Elapsed time: {end - start}")
-    plt.grid()
-    plt.show()
+#     for i in range(test_figures_count):
+#         plt.plot(calculate(n))
+#     plt.axhline(y=0, color="black", linestyle="-")
+#     end = time.time()
+#     print(f"Elapsed time: {end - start}")
+#     plt.grid()
+#     plt.show()
 
     # fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
     # ax1.plot(calculate(n), calculate(n))
