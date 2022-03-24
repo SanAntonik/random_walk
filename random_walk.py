@@ -1,6 +1,5 @@
 import random
 import matplotlib.pyplot as plt
-import numpy as np
 import time
 
 
@@ -23,38 +22,47 @@ def calculate(n):
     return ys
 
 
+# helper function for the function 'walk'
+def plot_figure(n, plots_per_figure, in_2D, ax):
+    for i in range(plots_per_figure):
+        if in_2D:
+            ax.plot(calculate(n), calculate(n))
+        else:
+            ax.plot(calculate(n))
+
+
+# test possibility: test whether you can plot different number of subplots in 1D and 2D
 # random walk in 1D and 2D
 def walk(n, nrows=1, ncols=1, plots_per_figure=1, in_2D=False, show_computation_time=False):
     start = time.time()
-    fig, axes = plt.subplots(nrows, ncols)
-    # plt.plot(calculate(n), color="purple")
-    # plt.show()
-    for row in axes:
-        for col in row:
-            for i in range(plots_per_figure):
-                if in_2D:
-                    col.plot(calculate(n), calculate(n))
-                else:
-                    col.plot(calculate(n))    
+    if nrows == ncols == 1:
+        fig, ax = plt.subplots()
+        plot_figure(n, plots_per_figure, in_2D, ax)
+    elif nrows == 1 and ncols > 1:
+        fig, axs = plt.subplots(ncols=ncols)
+        for ax in axs:
+            plot_figure(n, plots_per_figure, in_2D, ax)
+    elif nrows > 1 and ncols == 1:
+        fig, axs = plt.subplots(nrows=nrows)
+        for ax in axs:
+            plot_figure(n, plots_per_figure, in_2D, ax)
+    else:
+        fig, axs = plt.subplots(nrows, ncols)
+        for row in axs:
+            for ax in row:
+                plot_figure(n, plots_per_figure, in_2D, ax)
     end = time.time()
     if show_computation_time:
         print(f"Elapsed time: {end - start}")
     plt.show()
 
 
-if __name__=='__main__':
-    n = 200000
-    walk(n, nrows=2, ncols=3, plots_per_figure=10, in_2D=False, show_computation_time=True)
-    
-
-# for i in range(1):
-#     test_figures_count = 5
-#     start = time.time()
-
-#     for i in range(test_figures_count):
-#         plt.plot(calculate(n))
-#     plt.axhline(y=0, color="black", linestyle="-")
-#     end = time.time()
-#     print(f"Elapsed time: {end - start}")
-#     plt.grid()
-#     plt.show()
+if __name__ == '__main__':
+    n = 2000
+    nrows = 3
+    ncols = 2
+    plots_per_figure = 5
+    in_2D = False
+    show_computation_time = True
+    walk(n, nrows=nrows, ncols=ncols, plots_per_figure=plots_per_figure,
+         in_2D=in_2D, show_computation_time=show_computation_time)
