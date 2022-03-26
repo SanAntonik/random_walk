@@ -3,13 +3,6 @@ import matplotlib.pyplot as plt
 import time
 
 
-"""
-After running a bunch of tests, I found out that:
-1. it's better to call built-in functions directly without custom functions
-2. It's better to create one variable once and use it a lot of times instead of creating the same variable over and over again
-"""
-
-
 # heads = 1 (one step forward) and tails = -1 (one step backwards)
 coin_flip = [1, -1]
 def calculate(n):
@@ -31,7 +24,6 @@ def plot_figure(n, plots_per_figure, in_2D, ax):
             ax.plot(calculate(n))
 
 
-# test possibility: test whether you can plot different number of subplots in 1D and 2D
 # random walk in 1D and 2D
 def walk(n, nrows=1, ncols=1, plots_per_figure=1, in_2D=False, show_computation_time=False):
     start = time.time()
@@ -58,10 +50,10 @@ def walk(n, nrows=1, ncols=1, plots_per_figure=1, in_2D=False, show_computation_
 
 
 if __name__ == '__main__':
-    n = 2000
+    n = 25000
     nrows = 3
     ncols = 2
-    plots_per_figure = 5
+    plots_per_figure = 10
     in_2D = False
     show_computation_time = True
     walk(n, nrows=nrows, ncols=ncols, plots_per_figure=plots_per_figure,
